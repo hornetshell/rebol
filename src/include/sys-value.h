@@ -57,6 +57,15 @@ typedef struct Reb_Header {
 struct Reb_Value;
 typedef struct Reb_Value REBVAL;
 typedef struct Reb_Series REBSER;
+#if __x86_64__
+#define SIZE_REBVAL 32
+#define SIZE_REBDAT 8
+#define SIZE_REBGOB 92
+#else
+#define SIZE_REBVAL 16
+#define SIZE_REBDAT 4
+#define SIZE_REBGOD 64
+#endif
 
 // Value type identifier (generally, should be handled as integer):
 

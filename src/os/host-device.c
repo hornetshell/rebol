@@ -106,7 +106,7 @@ static int Poll_Default(REBDEV *dev)
 			result = dev->commands[req->command](req);
 		else {
 			result = -1;	// invalid command, remove it
-			req->error = ((REBCNT)-1);
+			req->error = 255;
 		}
 
 		// If done or error, remove command from list:
@@ -204,7 +204,7 @@ static int Poll_Default(REBDEV *dev)
 		prior = &dev->pending;
 		// Scan the pending requests, mark the one we got:
 		for (req = *prior; req; req = *prior) {
-			if ((int)(req->handle) == handle) {
+			if ((REBINT)(req->handle) == handle) {
 				req->error = error; // zero when no error
 				SET_FLAG(req->flags, RRF_DONE);
 				return;

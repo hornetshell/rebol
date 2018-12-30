@@ -53,7 +53,7 @@ typedef struct reb_codec_image {
 	int alpha;
 	unsigned char *data;
 	union {
-		u32 *bits;
+		REBCNT *bits;
 		void *other;
 	};
 	int error;

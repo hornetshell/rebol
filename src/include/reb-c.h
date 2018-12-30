@@ -136,8 +136,14 @@ typedef struct sInt64 {
 **
 ***********************************************************************/
 
-typedef i32				REBINT;     // 32 bit (64 bit defined below)
+
+#if __x86_64__
+typedef u64                             REBCNT;
+typedef i64				REBINT;     // 64 bit 
+#else
 typedef u32				REBCNT;     // 32 bit (counting number)
+typedef i32				REBINT;     // 32 bit (64 bit defined below for explicit use)
+#endif
 typedef i64				REBI64;     // 64 bit integer
 typedef u64				REBU64;     // 64 bit unsigned integer
 typedef i8				REBOOL;     // 8  bit flag (for struct usage)

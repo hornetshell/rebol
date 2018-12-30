@@ -236,7 +236,15 @@ form-header/gen "REBOL Host and Extension API" %reb-lib.r %make-reb-lib.r
 // Compatiblity with the lib requires that structs are aligned using the same
 // method. This is concrete, not abstract. The macro below uses struct
 // sizes to inform the developer that something is wrong.
-#define CHECK_STRUCT_ALIGN (sizeof(REBREQ) == 80 && sizeof(REBEVT) == 12)
+#if __x86_64__
+#define SIZE_REBREQ 100
+#define SIZE_REBEVT 16
+#else
+#define SIZE_REBREQ 800
+#define SIZE_REBEVT 12
+#endif
+
+#define CHECK_STRUCT_ALIGN (sizeof(REBREQ) == SIZE_REBREQ && sizeof(REBEVT) == SIZE_REBEVT)
 
 // Function entry points for reb-lib (used for MACROS below):}
 rlib

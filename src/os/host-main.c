@@ -141,6 +141,8 @@ int main(int argc, char **argv)
 	Open_StdIO();  // also sets up interrupt handler
 
 	// Initialize the REBOL library (reb-lib):
+        printf("Debug info: Size Of REBREQ: %d\n Size of REBEVT: %d\n", sizeof(REBREQ), sizeof(REBEVT));
+        
 	if (!CHECK_STRUCT_ALIGN) Host_Crash("Incompatible struct alignment");
 	if (!Host_Lib) Host_Crash("Missing host lib");
 	// !!! Second part will become vers[2] < RL_REV on release!!!
@@ -148,6 +150,8 @@ int main(int argc, char **argv)
 	n = RL_Init(&Main_Args, Host_Lib);
 	if (n == 1) Host_Crash("Host-lib wrong size");
 	if (n == 2) Host_Crash("Host-lib wrong version/checksum");
+        
+        puts("Debug info: made it past host crash checks!");
 
 #ifndef REB_CORE
 	Init_Windows();

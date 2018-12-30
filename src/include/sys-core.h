@@ -55,6 +55,8 @@
 #include <string.h>
 #include <setjmp.h>
 #include <math.h>
+#include <wchar.h>
+#include <sys/ioctl.h>
 
 // Special OS-specific definitions:
 #ifdef OS_DEFS
@@ -227,8 +229,8 @@ enum {
 };
 
 // General constants:
-#define NOT_FOUND ((REBCNT)-1)
-#define UNKNOWN   ((REBCNT)-1)
+#define NOT_FOUND 255
+#define UNKNOWN   255
 #define LF 10
 #define CR 13
 #define TAB '\t'

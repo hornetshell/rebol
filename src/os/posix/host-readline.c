@@ -45,6 +45,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 //#define TEST_MODE  // teset as stand-alone program
 

@@ -45,7 +45,7 @@ extern const REBYTE Str_Banner[];
 #ifdef WATCH_BOOT
 #define DOUT(s) puts(s)
 #else
-#define DOUT(s)
+#define DOUT(s) puts(s)
 #endif
 
 
@@ -95,10 +95,12 @@ extern const REBYTE Str_Banner[];
 	printf("%d %s\n", sizeof(REBALL), "all");
 #endif
 
+        printf("Debug info: Size Of REBVAL: %d\n Size of REBDAT: %d\n", sizeof(REBVAL), sizeof(REBDAT));
+        printf("Debug info: Size Of REBGOB: %d\n", sizeof(REBGOB));
 	ASSERT(VAL_TYPE(&val) == 123,  RP_REBVAL_ALIGNMENT);
-	ASSERT(sizeof(REBVAL) == 16,   RP_REBVAL_ALIGNMENT);
-	ASSERT1(sizeof(REBDAT) == 4,   RP_BAD_SIZE);
-	ASSERT1(sizeof(REBGOB) == 64,  RP_BAD_SIZE);
+	ASSERT(sizeof(REBVAL) == SIZE_REBVAL,   RP_REBVAL_ALIGNMENT);
+	ASSERT1(sizeof(REBDAT) == SIZE_REBDAT,   RP_BAD_SIZE);
+	ASSERT1(sizeof(REBGOB) == SIZE_REBGOB,  RP_BAD_SIZE);
 }
 
 
@@ -898,6 +900,7 @@ static REBCNT Set_Option_Word(REBCHR *str, REBCNT field)
 	PG_Boot_Level = BOOT_LEVEL_FULL;
 	PG_Mem_Usage = 0;
 	PG_Mem_Limit = 0;
+        DOUT("Making memory");
 	PG_Reb_Stats = Make_Mem(sizeof(*PG_Reb_Stats));
 	Reb_Opts = Make_Mem(sizeof(*Reb_Opts));
 
@@ -909,8 +912,10 @@ static REBCNT Set_Option_Word(REBCHR *str, REBCNT field)
 	Eval_Signals = 0;
 	Eval_Sigmask = ALL_BITS; /// dups Init_Task
 
+        DOUT("Init STD IO");
 	Init_StdIO();
 
+        DOUT("Assert Basics");
 	Assert_Basics();
 	PG_Boot_Time = OS_DELTA_TIME(0, 0);
 

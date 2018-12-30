@@ -103,7 +103,7 @@ extern int Do_Callback(REBSER *obj, u32 name, RXIARG *args, RXIARG *result);
 **
 ***********************************************************************/
 {
-	int marker;
+	REBINT marker;
 	REBCNT bounds;
 
 	Host_Lib = lib;
@@ -134,7 +134,7 @@ extern int Do_Callback(REBSER *obj, u32 name, RXIARG *args, RXIARG *result);
 
 /***********************************************************************
 **
-*/	RL_API int RL_Start(REBYTE *bin, REBINT len, REBCNT flags)
+*/	RL_API REBINT RL_Start(REBYTE *bin, REBINT len, REBCNT flags)
 /*
 **	Evaluate the default boot function.
 **
@@ -153,6 +153,8 @@ extern int Do_Callback(REBSER *obj, u32 name, RXIARG *args, RXIARG *result);
 	REBVAL *val;
 	REBSER spec = {0};
 	REBSER *ser;
+        
+        puts("DEBUG INFO: Starting...");
 
 	if (bin) {
 		spec.data = bin;
@@ -708,7 +710,7 @@ RL_API u32 RL_Find_Word(u32 *words, u32 word)
 	return 0;
 }
 
-RL_API int RL_Series(REBSER *series, REBCNT what)
+RL_API REBINT RL_Series(REBSER *series, REBCNT what)
 /*
 **	Get series information.
 **
@@ -722,7 +724,7 @@ RL_API int RL_Series(REBSER *series, REBCNT what)
 */
 {
 	switch (what) {
-	case RXI_SER_DATA: return (int)SERIES_DATA(series); // problem for 64 bit !!
+	case RXI_SER_DATA: return (REBINT)SERIES_DATA(series); // problem for 64 bit !!
 	case RXI_SER_TAIL: return SERIES_TAIL(series);
 	case RXI_SER_LEFT: return SERIES_AVAIL(series);
 	case RXI_SER_SIZE: return SERIES_REST(series);

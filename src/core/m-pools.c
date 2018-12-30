@@ -195,7 +195,7 @@ const REBPOOLSPEC Mem_Pool_Spec[MAX_POOLS] =
 /*
 ************************************************************************
 {
-	int n;
+	REBINT n;
 
 	for (n = 0; n <= 4 * MEM_BIG_SIZE + 1; n++)
 		if (FIND_POOL(n) != Find_Pool(n))
@@ -639,7 +639,7 @@ clear_header:
 			count++;
 			// The node better belong to one of the pool's segments:
 			for (seg = Mem_Pools[pool_num].segs; seg; seg = seg->next) {
-				if ((int)node > (int)seg && (int)node < (int)seg + (int)seg->size) break;
+				if ((REBINT)node > (REBINT)seg && (REBINT)node < (REBINT)seg + (REBINT)seg->size) break;
 			}
 			if (!seg) goto crash;
 			pnode = node; // for debugger
